@@ -28,8 +28,20 @@ async function run() {
 
     const apartmentsCollection = client.db("SkyNest").collection("apartments");
 
+    const userCollection = client.db("SkyNest").collection("users");
+
+    // Get all the Apartments Data
+
     app.get('/apartments', async(req,res) => {
       const result = await apartmentsCollection.find().toArray();
+      res.send(result);
+    })
+
+
+    // Users API
+    app.post('/users', async (req,res) => {
+      const user = req.body;
+      const result = await userCollection.insertOne(user);
       res.send(result);
     })
 
