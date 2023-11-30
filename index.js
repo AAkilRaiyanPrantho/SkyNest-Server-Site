@@ -30,6 +30,10 @@ async function run() {
 
     const userCollection = client.db("SkyNest").collection("users");
 
+    const agreementsCollection = client.db("SkyNest").collection("agreements");
+
+    const announcementsCollection = client.db("SkyNest").collection("announcements");
+
     // Get all the Apartments Data
 
     app.get('/apartments', async(req,res) => {
@@ -45,6 +49,28 @@ async function run() {
       res.send(result);
     })
 
+
+    // agreements API
+    // Get Operations
+    app.get('/agreements', async(req, res) => {
+      const result = await agreementsCollection.find().toArray();
+      res.send(result);
+    });
+    // POST Operation
+    app.post('/agreements', async (req,res) => {
+      const user = req.body;
+      const result = await agreementsCollection.insertOne(user);
+      res.send(result);
+    })
+
+
+    // announcements API
+    // POST Operations
+    app.post('/announcements', async (req,res) => {
+      const user = req.body;
+      const result = await announcementsCollection.insertOne(user);
+      res.send(result);
+    })
 
 
     // Connect the client to the server	(optional starting in v4.7)
