@@ -65,6 +65,12 @@ async function run() {
 
 
     // announcements API
+
+    // GET Operations
+    app.get('/announcements', async(req, res) => {
+      const result = await announcementsCollection.find().toArray();
+      res.send(result);
+    });
     // POST Operations
     app.post('/announcements', async (req,res) => {
       const user = req.body;
